@@ -1,7 +1,8 @@
 (function() {
+
   var Emphasize = { "rules": {} };
   Emphasize.languages = ["highlight-objective-c"];
-  Emphasize.rules["obj-c"] = [
+  Emphasize.rules["highlight-objective-c"] = [
     [/(#)(.+)(\n)/g, "<em class='em-preprocessor'>$1$2</em>$3"],
     [/(\[|^|&lt;|\(|\s+)([A-Z]{2}[a-zA-Z]{3,})(\s|\*|&gt;|;|,)/g, "$1<em class='em-class'>$2</em>$3"],
     [/(\[|^|\(|\s+)(\w{3,})(\()/g, "$1<em class='em-method'>$2</em>$3"],
@@ -15,11 +16,11 @@
     [/(\s+)(for|while|do|if|else|break|in)(\s+|\()/g, "$1<em class='em-keyword'>$2</em>$3"],
     [/(\s+|:)(YES|NO|return|break|continue|)(\s+|;)/g, "$1<em class='em-keyword'>$2</em>$3"],
     [/(\s+|\()(void|BOOL)(\s+|\))/g, "$1<em class='em-keyword'>$2</em>$3"],
-    [/(\/\/)(.*)(\n)/g, "<em class='em-comment'>$1$2$3</em>"],
+    [/(?:\/\*(?:[\s\S]*?)\*\/)|(?:([\s;])+\/\/(?:.*)$)/gm, "<em class='em-comment'>$1$2$3</em>"],
     [/(\s+|:|,)([0-9])(\s+|:|,|;)/g, "$1<em class='em-number'>$2</em>$3"]
   ];
 
-  Emphasize.query = ".highlight." + Emphasize.languages.join(",.emphasize.");
+  Emphasize.query = ".highlight." + Emphasize.languages.join(",.highlight pre");
   Emphasize.regex = new RegExp("(\\s|^)(" + Emphasize.languages.join("|") + ")(\\s|$)", "i");
 
   var blocks = document.querySelectorAll(Emphasize.query);
@@ -36,7 +37,7 @@
         }
       }
 
-      block.innerHTML = text;
+      block.innerHTML = "<pre>" + text + "</pre>";
   };
 
 })();
