@@ -1,9 +1,9 @@
 h1. emphasize.js
 
---
+
 Test fork for CocoaDocs v2.
 Presumes the traditional github structure for inline code.
---
+
 
 emphasize.js is a tiny javascript that does code syntax highlighting. It only loads at the end of the document so it doesn't delay page loading. **Right now it only supports Objective-C** but as it's "open-source":https://github.com/samvermette/emphasize.js, feel free to contribute by adding your favorite language to it.
 
